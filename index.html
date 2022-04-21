@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#0 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  
+  <title>Your First Data Vault model</title>
+  <link rel="stylesheet" href="./qwiklab_files/css">
+  <link rel="stylesheet" href="./qwiklab_files/icon">
+  <link rel="stylesheet" href="./qwiklab_files/codelab-elements.css">
+  <link rel="stylesheet" href="./qwiklab_files/prettify.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab id="your-first-dv-model" environment="web" feedback-link="" selected="0" google-codelab-ready="" codelab-title="Your First Data Vault model"><div id="drawer"><div class="codelab-time-container"><div class="time-remaining" title="Time remaining"><i class="material-icons">access_time</i>95 mins remaining</div></div><div class="steps"><ol><li completed="" selected=""><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#0"><span class="step"><span>Introduction</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#1"><span class="step"><span>Basic data processing in BigQuery</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#2"><span class="step"><span>Drawing first raw entities</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#3"><span class="step"><span>Drawing first raw entities - results</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#4"><span class="step"><span>Architecture</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#5"><span class="step"><span>Architecture</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#6"><span class="step"><span>Setting up staging datasets</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#7"><span class="step"><span>Creating Meter HUB</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#8"><span class="step"><span>Creating Reading HUB</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#9"><span class="step"><span>Creating Meter Satellite</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#10"><span class="step"><span>Creating Reader Sat</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#11"><span class="step"><span>Creating Link</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#12"><span class="step"><span>Customer - Hub, Sat, Link</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#13"><span class="step"><span>Information mart</span></span></a></li><li><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#14"><span class="step"><span>Congratulations</span></span></a></li></ol></div><div class="metadata"><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#" id="codelab-feedback"><i class="material-icons">bug_report</i> Report a mistake</a></div></div><div id="codelab-title"><div id="codelab-nav-buttons"><a href="https://codelabs-preview.appspot.com/" id="arrow-back"><i class="material-icons">close</i></a><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#" id="menu"><i class="material-icons">menu</i></a></div><h1 is-upgraded="" class="title">Your First Data Vault model</h1><div class="codelab-time-container"><div class="time-remaining" title="Time remaining"><i class="material-icons">access_time</i>95 mins remaining</div></div><devsite-user></devsite-user></div><div id="main"><div id="steps"><google-codelab-step label="Introduction" duration="5" step="1" style="transform: translate3d(0px, 0px, 0px);" selected=""><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">1. Introduction</h2>
+        <h2 is-upgraded=""><strong>What you'll build</strong></h2>
+<p>In this codelab, you're going to:</p>
+<ul>
+<li>Learn basics of BigQuery</li>
+<li>Learn how to create datasets, tables, load data in various ways (via load, via SQL)</li>
+<li>Learn basics of data vault and implement your own model</li>
+<li>Learn how to build reports</li>
+</ul>
+<aside class="warning"><p><strong>Note:</strong> There are 2 versions of this codelab - medium and hard</p>
+</aside>
+<h2 is-upgraded=""><strong>Introduction to Qwiklabs</strong></h2>
+<p>Qwiklabs is an environment where you can easily learn GCP without registering, giving credit cards details and doing any setup. Just register and enjoy.  </p>
+<h3 is-upgraded=""><strong>Obtaining token</strong></h3>
+<p>The only thing that you need is an access token that will allow you to open a lab. </p>
+<h3 is-upgraded=""><strong>Lab selection</strong></h3>
+<p>Qwiklabs offer multiple labs, but this time we have prepared a custom one and we will use one of the existing labs just to have access to the GCP environment, but you will follow different instructions (this one). </p>
+<h3 is-upgraded=""><strong>Next steps</strong></h3>
+<p>Open this link, register/sign in qwiklabs,  use token/credit to open the lab. The 90 min counter will start to decrease on the website. Please track the time on this codelab (top right corner).</p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Basic data processing in BigQuery" duration="10" step="2" style="transform: translate3d(110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">2. Basic data processing in BigQuery</h2>
+        <h2 is-upgraded=""><strong>Run your first BigQuery UI report</strong></h2>
+<p>....</p>
+<h2 is-upgraded=""><strong>Create dataset and table</strong></h2>
+<p>...</p>
+<h2 is-upgraded=""><strong>Load your first file</strong></h2>
+<p>...</p>
+<h3 is-upgraded=""><strong>Strongly Recommended: Use notepad on side, copy paste commands, learn cloud shell</strong></h3>
+<p>Using Cloud Shell</p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Drawing first raw entities" duration="5" step="3"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">3. Drawing first raw entities</h2>
+        <h2 is-upgraded=""><strong>Business problem definition</strong></h2>
+<p>As an energy company we would like to store, analyze and provide insights on data from meters. </p>
+<p>There are many use cases in our mind:</p>
+<ul>
+<li>Billing customer</li>
+<li>Customer 360 for marketing</li>
+<li>Being helpful to the customer and providing them insights</li>
+<li>Anomaly detection</li>
+</ul>
+<p>Today we may focus on the first use case only - providing information about readings on meters. If you have time, you will also be able to add customer context. </p>
+<h2 is-upgraded="">Meter and Reading models</h2>
+<p>In the first task you will use pen and paper.</p>
+<p>Here are raw exports:</p>
+<p>meter_readings_export:</p>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/pasted image 0.png"></p>
+<p>Meter_load:</p>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/pasted image 0(1).png"></p>
+<p>Customer_export:</p>
+<p class="image-container"><img style="width: 519.00px" src="./qwiklab_files/pasted image 0(2).png"></p>
+<p>Customer_meter_export:</p>
+<p class="image-container"><img style="width: 406.00px" src="./qwiklab_files/pasted image 0(3).png"></p>
+<p>Some things to investigate</p>
+<ol type="1" start="1">
+<li>What are the business keys for meter and reading and customer?</li>
+<li>What are technical fields that are important for auditing (source? date?)</li>
+<li>What are the attributes that are important for the use case?</li>
+<li>What additional fields you could add to make this model more performant (hint: hashes)</li>
+</ol>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Drawing first raw entities - results" duration="5" step="4"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">4. Drawing first raw entities - results</h2>
+        <aside class="special"><p><strong>Tip: </strong>You may end up with slightly different satellite schema</p>
+</aside>
+<h2 is-upgraded=""><strong>Relationships</strong></h2>
+<p>You should come up with something like this:</p>
+<p class="image-container"><img style="width: 332.50px" src="./qwiklab_files/Untitled.png"></p>
+<h2 is-upgraded="">Example HUBs</h2>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/Untitled(1).png"></p>
+<h2 is-upgraded="">Example SATs:</h2>
+<p>Sat_Meter:</p>
+<p class="image-container"><img style="width: 196.00px" src="./qwiklab_files/pasted image 0(4).png"></p>
+<h2 is-upgraded=""><strong>Example LINKs:</strong></h2>
+<p class="image-container"><img style="width: 388.00px" src="./qwiklab_files/pasted image 0(5).png"></p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Architecture" duration="3" step="5"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">5. Architecture</h2>
+        <p>It's time to draw our first GCP architecture. You can use again, pen and paper and focus on drawing following components or visualize it in mind:</p>
+<ul>
+<li>GCS</li>
+<li>BigQuery datasets:</li>
+<li>Staging dataset</li>
+<li>Raw vault dataset</li>
+<li>Information mart dataset</li>
+<li>Business vault dataset</li>
+<li>BI tools (BQ UI)</li>
+</ul>
+<p>Connect with arrows to show data flow. </p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Architecture" duration="2" step="6"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">6. Architecture</h2>
+        <aside class="special"><p><strong>Tip: </strong>You may end up with slightly less complex architecture, but data flow should be matching. </p>
+</aside>
+<h2 is-upgraded=""><strong>Outcome</strong></h2>
+<p>For the sake of completeness, we are also adding source systems and other useful components. </p>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/Untitled(2).png"></p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Setting up staging datasets" duration="5" step="7"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">7. Setting up staging datasets</h2>
+        <p>For this workshop we will focus on 2 entities - meter and reading. If you have time, you will be able to add customer entities as well. </p>
+<p>Create a BigQuery dataset "staging", located in a US multi region dataset.</p>
+<h3 is-upgraded=""><strong>Console</strong></h3>
+<ol type="1" start="1">
+<li>Press 3 dots next to project:</li>
+</ol>
+<p class="image-container"><img style="width: 330.00px" src="./qwiklab_files/pasted image 0(6).png"></p>
+<ol type="1" start="2">
+<li>Type name and set location</li>
+</ol>
+<p class="image-container"><img style="width: 516.00px" src="./qwiklab_files/pasted image 0(7).png"></p>
+<p>Within BigQuery UI, compose a new query. </p>
+<h3 is-upgraded="">Meter Staging table</h3>
+<pre><code><span class="pln">CREATE OR REPLACE TABLE staging</span><span class="pun">.</span><span class="pln">meter_load
+</span><span class="pun">(</span><span class="pln">
+ meter_id INTEGER</span><span class="pun">,</span><span class="pln">
+ tariff STRING</span><span class="pun">,</span><span class="pln">
+ location STRING</span><span class="pun">,</span><span class="pln">
+ source STRING</span><span class="pun">,</span><span class="pln">
+ load_date DATE
+</span><span class="pun">);</span></code></pre>
+<h4 is-upgraded="">Meter Readings Staging table</h4>
+<pre><code><span class="pln">CREATE OR REPLACE TABLE staging</span><span class="pun">.</span><span class="pln">meter_readings_load
+</span><span class="pun">(</span><span class="pln">
+ readings_id INTEGER</span><span class="pun">,</span><span class="pln">
+ meter_id INTEGER</span><span class="pun">,</span><span class="pln">
+ readings FLOAT64</span><span class="pun">,</span><span class="pln">
+ readings_time TIMESTAMP</span><span class="pun">,</span><span class="pln">
+ source STRING</span><span class="pun">,</span><span class="pln">
+ load_date DATE
+</span><span class="pun">);</span></code></pre>
+<h4 is-upgraded="">Load files (via cloud shell)</h4>
+<p>Example command</p>
+<pre>bq load \
+--autodetect \
+--source_format=FORMAT \
+PROJECT_ID:DATASET.TABLE \
+PATH_TO_SOURCE</pre>
+<pre>bq load --autodetect --source_format=CSV staging.meter_load meter_data\ -\ meters.csv
+bq load --autodetect --source_format=CSV staging.meter_readings_load meter_data\ -\ readings.csv
+</pre>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Creating Meter HUB" duration="5" step="8"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">8. Creating Meter HUB</h2>
+        <p>Create a BigQuery dataset "raw", located in the US. You can try bq cli (cloud shell):</p>
+<pre>bq --location=us mk raw</pre>
+<p>Create hash helper UDF (BigQuery UI)</p>
+<pre><code><span class="pln">CREATE OR REPLACE FUNCTION raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">x ANY TYPE</span><span class="pun">)</span><span class="pln">
+RETURNS STRING
+AS </span><span class="pun">(</span><span class="pln">TO_BASE64</span><span class="pun">(</span><span class="pln">MD5</span><span class="pun">(</span><span class="pln">IFNULL</span><span class="pun">(</span><span class="pln">NULLIF</span><span class="pun">(</span><span class="pln">UPPER</span><span class="pun">(</span><span class="pln">TRIM</span><span class="pun">(</span><span class="pln">CAST</span><span class="pun">(</span><span class="pln">x AS STRING</span><span class="pun">))),</span><span class="pln"> </span><span class="str">''</span><span class="pun">),</span><span class="pln"> </span><span class="str">'^^'</span><span class="pun">))));</span></code></pre>
+<p>Create a BigQuery table "hub_meter"</p>
+<pre>CREATE OR REPLACE TABLE raw.hub_meter
+(
+ meter_hash_id STRING,
+ meter_id INT,
+ source STRING,
+ load_date DATE
+)
+PARTITION BY load_date 
+CLUSTER BY meter_hash_id, load_date;</pre>
+<p>Now load it. </p>
+<pre>INSERT INTO raw.hub_meter
+SELECT DISTINCT
+raw.ConvertHash(s.meter_id) AS meter_hash_id --creating Meter hashID on business keys
+,s.meter_id
+,s.source
+,s.load_date
+FROM staging.meter_load AS s LEFT JOIN raw.hub_meter AS r
+ON r.meter_id =  s.meter_id
+WHERE  
+r.meter_hash_id IS NULL </pre>
+<aside class="warning"><p><strong>Remember:</strong> In the above query we use DISTINCT at the staging table to get rid of possible duplicates. </p>
+<p>We can set the load date as &gt;= instead of =. The reason is that we may have to reload for a few days. In that case we avoid mistakes by setting load dates for the last few days.</p>
+</aside>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Creating Reading HUB" duration="5" step="9"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">9. Creating Reading HUB</h2>
+        <p>Create a BigQuery table "hub_readings"</p>
+<pre>CREATE OR REPLACE TABLE raw.hub_readings
+(
+readings_hash_id STRING,
+readings_id INTEGER,
+source STRING,
+load_date DATE
+)
+PARTITION BY load_date --Partitioning table based on loaddate of day
+CLUSTER BY readings_hash_id; --Clustering based on Readings_HashID which will be used further for querying data</pre>
+<p>Now load it. </p>
+<pre><code><span class="pln">INSERT INTO raw</span><span class="pun">.</span><span class="pln">hub_readings
+SELECT DISTINCT
+raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">s</span><span class="pun">.</span><span class="pln">readings_id</span><span class="pun">)</span><span class="pln"> AS readings_hash_id</span><span class="pun">,</span><span class="pln">
+s</span><span class="pun">.</span><span class="pln">readings_id</span><span class="pun">,</span><span class="pln">
+s</span><span class="pun">.</span><span class="pln">source</span><span class="pun">,</span><span class="pln">
+s</span><span class="pun">.</span><span class="pln">load_date
+FROM
+staging</span><span class="pun">.</span><span class="pln">meter_readings_load AS s LEFT JOIN raw</span><span class="pun">.</span><span class="pln">hub_readings AS r
+ON r</span><span class="pun">.</span><span class="pln">readings_id </span><span class="pun">=</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">readings_id
+WHERE
+r</span><span class="pun">.</span><span class="pln">readings_hash_id IS NULL
+</span><span class="pun">--</span><span class="pln"> </span><span class="kwd">and</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">load_date</span><span class="pun">=</span><span class="pln"> </span></code></pre>
+<aside class="warning"><p><strong>Remember:</strong> In the above query we use DISTINCT at the staging table to get rid of possible duplicates. </p>
+<p>We can set the load date as &gt;= instead of =. The reason is that we may have to reload for a few days. In that case we avoid mistakes by setting load dates for the last few days.</p>
+</aside>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Creating Meter Satellite" duration="10" step="10"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">10. Creating Meter Satellite</h2>
+        <p>The Meter satellite table is clustered based on the source and the Effective_From columns. With these clustering options, we are able to filter meters by source and their installation date really fast.</p>
+<pre><code><span class="pln">CREATE OR REPLACE TABLE raw</span><span class="pun">.</span><span class="pln">sat_meter
+</span><span class="pun">(</span><span class="pln">
+meter_hash_id STRING</span><span class="pun">,</span><span class="pln">
+sat_meter_hashdiff STRING</span><span class="pun">,</span><span class="pln">
+meter_id INTEGER</span><span class="pun">,</span><span class="pln">
+service_name STRING</span><span class="pun">,</span><span class="pln">
+manufacturer STRING</span><span class="pun">,</span><span class="pln">
+effective_from DATE</span><span class="pun">,</span><span class="pln">
+source STRING</span><span class="pun">,</span><span class="pln">
+load_date DATE
+</span><span class="pun">)</span><span class="pln">
+CLUSTER BY source</span><span class="pun">,</span><span class="pln"> effective_from</span><span class="pun">;</span></code></pre>
+<p>In the above query, we don't have partitioning for the loadDate. This is totally specific for our use case. We don't expect the user to run meter joins based on a particular time period. </p>
+<pre><code><span class="pln">INSERT INTO raw</span><span class="pun">.</span><span class="pln">sat_meter
+WITH
+newmeter AS </span><span class="pun">(</span><span class="pln">
+SELECT
+ service_name</span><span class="pun">,</span><span class="pln">
+ meter_id</span><span class="pun">,</span><span class="pln"> 
+ manufacturer</span><span class="pun">,</span><span class="pln">
+ load_date AS effective_from</span><span class="pun">,</span><span class="pln">
+ source</span><span class="pun">,</span><span class="pln">
+ load_date</span><span class="pun">,</span><span class="pln">
+ raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">meter_id</span><span class="pun">)</span><span class="pln"> AS meter_hash_id</span><span class="pun">,</span><span class="pln">
+ raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">CONCAT</span><span class="pun">(</span><span class="pln">service_name</span><span class="pun">,</span><span class="str">'|'</span><span class="pun">,</span><span class="pln"> manufacturer</span><span class="pun">))</span><span class="pln"> AS sat_meter_hashdiff
+FROM staging</span><span class="pun">.</span><span class="pln">meter_load</span><span class="pun">),</span><span class="pln">
+currmeter AS </span><span class="pun">(</span><span class="pln">SELECT meter_hash_id</span><span class="pun">,</span><span class="pln"> sat_meter_hashdiff FROM raw</span><span class="pun">.</span><span class="pln">sat_meter</span><span class="pun">)</span><span class="pln">
+SELECT DISTINCT
+ newmeter</span><span class="pun">.</span><span class="pln">meter_hash_id</span><span class="pun">,</span><span class="pln">
+ newmeter</span><span class="pun">.</span><span class="pln">sat_meter_hashdiff</span><span class="pun">,</span><span class="pln">
+ newmeter</span><span class="pun">.</span><span class="pln">meter_id</span><span class="pun">,</span><span class="pln">
+ newmeter</span><span class="pun">.</span><span class="pln">service_name</span><span class="pun">,</span><span class="pln">
+ newmeter</span><span class="pun">.</span><span class="pln">manufacturer</span><span class="pun">,</span><span class="pln">
+ newmeter</span><span class="pun">.</span><span class="pln">effective_from</span><span class="pun">,</span><span class="pln">
+ newmeter</span><span class="pun">.</span><span class="pln">source</span><span class="pun">,</span><span class="pln">
+ newmeter</span><span class="pun">.</span><span class="pln">load_date
+FROM newmeter
+LEFT JOIN currmeter
+USING</span><span class="pun">(</span><span class="pln">meter_hash_id</span><span class="pun">,</span><span class="pln"> sat_meter_hashdiff</span><span class="pun">)</span><span class="pln">
+WHERE
+currmeter</span><span class="pun">.</span><span class="pln">sat_meter_hashdiff </span><span class="kwd">is</span><span class="pln"> NULL
+</span><span class="pun">--</span><span class="pln"> </span><span class="kwd">and</span><span class="pln"> newmeter</span><span class="pun">.</span><span class="pln">load_date</span><span class="pun">=</span><span class="str">'2021-06-12'</span></code></pre>
+<aside class="warning"><p><strong>Remember:</strong> In the above query we use hash comparison to speed up finding changes. </p>
+</aside>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Creating Reader Sat" duration="10" step="11"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">11. Creating Reader Sat</h2>
+        <p>In this satellite table, we don't use the usual load_date as the partitioning column since fundamentally we are more interested in the readings_time. readings_time is the column that end users will query these tables. We also provide clustering based on source and readings_time since we consider that these are the most used columns in filtering. </p>
+<pre><code><span class="pln">CREATE OR REPLACE TABLE raw</span><span class="pun">.</span><span class="pln">sat_readings
+</span><span class="pun">(</span><span class="pln">
+ readings_hash_id STRING</span><span class="pun">,</span><span class="pln">
+ sat_readings_hashdiff STRING</span><span class="pun">,</span><span class="pln">
+ readings_time TIMESTAMP</span><span class="pun">,</span><span class="pln">
+ readings FLOAT64</span><span class="pun">,</span><span class="pln">
+ effective_from DATE</span><span class="pun">,</span><span class="pln">
+ source STRING</span><span class="pun">,</span><span class="pln">
+ load_date DATE
+</span><span class="pun">)</span><span class="pln">
+PARTITION BY DATE</span><span class="pun">(</span><span class="pln">readings_time</span><span class="pun">)</span><span class="pln">
+CLUSTER BY source</span><span class="pun">,</span><span class="pln"> readings_time</span><span class="pun">;</span></code></pre>
+<p>Now we load it:</p>
+<pre><code><span class="pln">INSERT INTO raw</span><span class="pun">.</span><span class="pln">sat_readings
+WITH
+newmeter AS </span><span class="pun">(</span><span class="pln">
+SELECT  DISTINCT
+  raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">readings_id</span><span class="pun">)</span><span class="pln"> AS readings_hash_id
+ </span><span class="pun">,</span><span class="pln">raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">CONCAT</span><span class="pun">(</span><span class="pln">readings</span><span class="pun">,</span><span class="str">'|'</span><span class="pun">,</span><span class="pln"> readings_time</span><span class="pun">))</span><span class="pln"> AS sat_readings_hashdiff
+ </span><span class="pun">,</span><span class="pln">readings_time
+ </span><span class="pun">,</span><span class="pln">readings
+ </span><span class="pun">,</span><span class="pln">CAST</span><span class="pun">(</span><span class="pln">meter_readings</span><span class="pun">.</span><span class="pln">load_date AS DATE</span><span class="pun">)</span><span class="pln"> AS effective_from
+ </span><span class="pun">,</span><span class="pln">meter_readings</span><span class="pun">.</span><span class="pln">source
+ </span><span class="pun">,</span><span class="pln">CAST</span><span class="pun">(</span><span class="pln">meter_readings</span><span class="pun">.</span><span class="pln">load_date AS DATE</span><span class="pun">)</span><span class="pln"> AS LOAD_DATE
+FROM
+staging</span><span class="pun">.</span><span class="pln">meter_readings_load AS meter_readings
+</span><span class="pun">),</span><span class="pln">
+currmeter AS </span><span class="pun">(</span><span class="pln">
+SELECT readings_hash_id</span><span class="pun">,</span><span class="pln"> sat_readings_hashdiff FROM raw</span><span class="pun">.</span><span class="pln">sat_readings
+</span><span class="pun">)</span><span class="pln">
+SELECT
+newmeter</span><span class="pun">.</span><span class="pln">readings_hash_id</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">sat_readings_hashdiff</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">readings_time</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">readings</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">effective_from</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">source</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">load_date
+FROM newmeter
+LEFT JOIN currmeter
+USING</span><span class="pun">(</span><span class="pln">readings_hash_id</span><span class="pun">,</span><span class="pln"> sat_readings_hashdiff</span><span class="pun">)</span><span class="pln">
+WHERE
+currmeter</span><span class="pun">.</span><span class="pln">sat_readings_hashdiff </span><span class="kwd">is</span><span class="pln"> NULL</span></code></pre>
+<aside class="warning"><p><strong>Remember:</strong> In the above query we use hash comparison to speed up finding changes. </p>
+</aside>
+<aside class="warning"><p><strong>Notice:</strong> Above query will insert rows only once. Retry the query and you will see that due to hashdiffs used, data won't be duplicated.  </p>
+</aside>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Creating Link" duration="10" step="12"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">12. Creating Link</h2>
+        <p>TODO</p>
+<pre><code><span class="pln">CREATE OR REPLACE TABLE raw</span><span class="pun">.</span><span class="pln">link_meter_readings
+</span><span class="pun">(</span><span class="pln">
+ link_hash_id STRING</span><span class="pun">,</span><span class="pln">
+ meter_hash_id STRING</span><span class="pun">,</span><span class="pln">
+ readings_hash_id STRING</span><span class="pun">,</span><span class="pln">
+ source STRING</span><span class="pun">,</span><span class="pln">
+ load_date DATE
+</span><span class="pun">)</span><span class="pln">
+PARTITION BY load_date
+CLUSTER BY source</span><span class="pun">;</span></code></pre>
+<p>Now we load it:</p>
+<pre><code><span class="pln">INSERT INTO raw</span><span class="pun">.</span><span class="pln">link_meter_readings
+SELECT  DISTINCT
+raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">CONCAT</span><span class="pun">(</span><span class="pln">meter_id</span><span class="pun">,</span><span class="pln"> </span><span class="str">'|'</span><span class="pun">,</span><span class="pln"> readings_id</span><span class="pun">))</span><span class="pln"> AS link_hash_id</span><span class="pun">,</span><span class="pln">
+raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">meter_id</span><span class="pun">)</span><span class="pln"> AS meter_hash_id</span><span class="pun">,</span><span class="pln">
+raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">readings_id</span><span class="pun">)</span><span class="pln"> AS readings_hash_id</span><span class="pun">,</span><span class="pln">
+r</span><span class="pun">.</span><span class="pln">source</span><span class="pun">,</span><span class="pln">
+r</span><span class="pun">.</span><span class="pln">load_date
+FROM
+staging</span><span class="pun">.</span><span class="pln">meter_readings_load r
+WHERE raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">CONCAT</span><span class="pun">(</span><span class="pln">meter_id</span><span class="pun">,</span><span class="pln"> </span><span class="str">'|'</span><span class="pun">,</span><span class="pln"> readings_id</span><span class="pun">))</span><span class="pln"> NOT IN </span><span class="pun">(</span><span class="pln">SELECT link_hash_id FROM raw</span><span class="pun">.</span><span class="pln">link_meter_readings</span><span class="pun">)</span></code></pre>
+<aside class="warning"><p><strong>Remember:</strong> In the above query we use hash comparison to speed up finding changes. </p>
+</aside>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Customer - Hub, Sat, Link" duration="0" step="13"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">13. Customer - Hub, Sat, Link</h2>
+        <p>If you have less than 30 minutes left, skip this step. </p>
+<p>If you have more (30-45 minutes), then give it a try and model customer entities.  </p>
+<h2 is-upgraded=""><strong>Staging DDL</strong></h2>
+<h4 is-upgraded="">Customer Staging table</h4>
+<pre><code><span class="pln">CREATE OR REPLACE TABLE staging</span><span class="pun">.</span><span class="pln">customer_load
+</span><span class="pun">(</span><span class="pln">
+ c_customer_id STRING</span><span class="pun">,</span><span class="pln">
+ location STRING</span><span class="pun">,</span><span class="pln">
+ c_customer_name STRING</span><span class="pun">,</span><span class="pln">
+ source STRING</span><span class="pun">,</span><span class="pln">
+ load_date DATE
+</span><span class="pun">);</span></code></pre>
+<h4 is-upgraded="">Customer meter Staging table</h4>
+<pre><code><span class="pln">CREATE OR REPLACE TABLE staging</span><span class="pun">.</span><span class="pln">customer_meter_load
+</span><span class="pun">(</span><span class="pln">
+ c_customer_id STRING</span><span class="pun">,</span><span class="pln">
+ meter_id INTEGER</span><span class="pun">,</span><span class="pln">
+ source STRING</span><span class="pun">,</span><span class="pln">
+ load_date DATE
+</span><span class="pun">);</span></code></pre>
+<h3 is-upgraded=""><strong>Loading data</strong></h3>
+<pre>bq load --autodetect --source_format=CSV staging.customer_load meter_data\ -\ customers.csv
+bq load --autodetect --source_format=CSV staging.customer_meter_load meter_data\ -\ cust_meter.csv</pre>
+<h2 is-upgraded=""><strong>Raw Vault DDL</strong></h2>
+<pre><code><span class="pln">CREATE OR REPLACE TABLE raw</span><span class="pun">.</span><span class="pln">hub_customer
+</span><span class="pun">(</span><span class="pln">
+customer_hash_id STRING</span><span class="pun">,</span><span class="pln">
+customer_id STRING</span><span class="pun">,</span><span class="pln">
+source STRING</span><span class="pun">,</span><span class="pln">
+load_date DATE
+</span><span class="pun">)</span><span class="pln">
+PARTITION BY load_date </span><span class="pun">--</span><span class="typ">Partitioning</span><span class="pln"> table based on loaddate of day
+CLUSTER BY customer_hash_id</span><span class="pun">;</span><span class="pln"> </span><span class="pun">--</span><span class="typ">Clustering</span><span class="pln"> based on </span><span class="typ">HashID</span><span class="pln"> which will be used further </span><span class="kwd">for</span><span class="pln"> querying data
+CREATE OR REPLACE TABLE raw</span><span class="pun">.</span><span class="pln">sat_customer
+</span><span class="pun">(</span><span class="pln">
+customer_hash_id STRING</span><span class="pun">,</span><span class="pln">
+sat_customer_hashdiff STRING</span><span class="pun">,</span><span class="pln">
+email STRING</span><span class="pun">,</span><span class="pln">
+name STRING</span><span class="pun">,</span><span class="pln">
+effective_from DATE</span><span class="pun">,</span><span class="pln">
+source STRING</span><span class="pun">,</span><span class="pln">
+load_date DATE
+</span><span class="pun">)</span><span class="pln">
+PARTITION BY load_date</span><span class="pun">;</span><span class="pln">
+
+CREATE OR REPLACE TABLE raw</span><span class="pun">.</span><span class="pln">link_meter_customer
+</span><span class="pun">(</span><span class="pln">
+link_hash_id STRING</span><span class="pun">,</span><span class="pln">
+meter_hash_id STRING</span><span class="pun">,</span><span class="pln">
+customer_hash_id STRING</span><span class="pun">,</span><span class="pln">
+source STRING</span><span class="pun">,</span><span class="pln">
+load_date DATE
+</span><span class="pun">)</span><span class="pln">
+PARTITION BY load_date
+CLUSTER BY source</span><span class="pun">;</span></code></pre>
+<h2 is-upgraded=""><strong>DML</strong></h2>
+<pre><code><span class="pln">INSERT INTO raw</span><span class="pun">.</span><span class="pln">hub_customer
+SELECT DISTINCT
+raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">s</span><span class="pun">.</span><span class="pln">c_customer_id</span><span class="pun">)</span><span class="pln"> AS customer_hash_id</span><span class="pun">,</span><span class="pln">
+s</span><span class="pun">.</span><span class="pln">c_customer_id</span><span class="pun">,</span><span class="pln">
+s</span><span class="pun">.</span><span class="pln">source</span><span class="pun">,</span><span class="pln">
+s</span><span class="pun">.</span><span class="pln">load_date
+FROM
+staging</span><span class="pun">.</span><span class="pln">customer_load AS s LEFT JOIN raw</span><span class="pun">.</span><span class="pln">hub_customer AS r
+ON r</span><span class="pun">.</span><span class="pln">customer_id </span><span class="pun">=</span><span class="pln"> s</span><span class="pun">.</span><span class="pln">c_customer_id
+WHERE
+r</span><span class="pun">.</span><span class="pln">customer_hash_id IS NULL</span><span class="pun">;</span><span class="pln">
+
+
+INSERT INTO raw</span><span class="pun">.</span><span class="pln">sat_customer
+WITH
+newmeter AS </span><span class="pun">(</span><span class="pln">
+SELECT  DISTINCT
+ raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">c_customer_id</span><span class="pun">)</span><span class="pln"> AS customer_hash_id
+</span><span class="pun">,</span><span class="pln">raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">CONCAT</span><span class="pun">(</span><span class="pln">c_email_address</span><span class="pun">,</span><span class="str">'|'</span><span class="pun">,</span><span class="pln"> c_customer_name</span><span class="pun">))</span><span class="pln"> AS sat_customer_hashdiff
+</span><span class="pun">,</span><span class="pln">c_email_address
+</span><span class="pun">,</span><span class="pln">c_customer_name
+</span><span class="pun">,</span><span class="pln">CAST</span><span class="pun">(</span><span class="pln">customer_load</span><span class="pun">.</span><span class="pln">load_date AS DATE</span><span class="pun">)</span><span class="pln"> AS effective_from
+</span><span class="pun">,</span><span class="pln">customer_load</span><span class="pun">.</span><span class="pln">source
+</span><span class="pun">,</span><span class="pln">CAST</span><span class="pun">(</span><span class="pln">customer_load</span><span class="pun">.</span><span class="pln">load_date AS DATE</span><span class="pun">)</span><span class="pln"> AS LOAD_DATE
+FROM
+staging</span><span class="pun">.</span><span class="pln">customer_load AS customer_load
+</span><span class="pun">),</span><span class="pln">
+currmeter AS </span><span class="pun">(</span><span class="pln">
+SELECT customer_hash_id</span><span class="pun">,</span><span class="pln"> sat_customer_hashdiff FROM raw</span><span class="pun">.</span><span class="pln">sat_customer
+</span><span class="pun">)</span><span class="pln">
+SELECT
+newmeter</span><span class="pun">.</span><span class="pln">customer_hash_id</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">sat_customer_hashdiff</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">c_email_address</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">c_customer_name</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">effective_from</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">source</span><span class="pun">,</span><span class="pln">
+newmeter</span><span class="pun">.</span><span class="pln">load_date
+FROM newmeter
+LEFT JOIN currmeter
+USING</span><span class="pun">(</span><span class="pln">customer_hash_id</span><span class="pun">,</span><span class="pln"> sat_customer_hashdiff</span><span class="pun">)</span><span class="pln">
+WHERE
+currmeter</span><span class="pun">.</span><span class="pln">sat_customer_hashdiff </span><span class="kwd">is</span><span class="pln"> NULL
+</span><span class="pun">;</span><span class="pln">
+
+INSERT INTO raw</span><span class="pun">.</span><span class="pln">link_meter_customer
+SELECT  DISTINCT
+raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">CONCAT</span><span class="pun">(</span><span class="pln">meter_id</span><span class="pun">,</span><span class="pln"> </span><span class="str">'|'</span><span class="pun">,</span><span class="pln"> c_customer_id</span><span class="pun">))</span><span class="pln"> AS link_hash_id</span><span class="pun">,</span><span class="pln">
+raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">meter_id</span><span class="pun">)</span><span class="pln"> AS meter_hash_id</span><span class="pun">,</span><span class="pln">
+raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">c_customer_id</span><span class="pun">)</span><span class="pln"> AS customer_hash_id</span><span class="pun">,</span><span class="pln">
+r</span><span class="pun">.</span><span class="pln">source</span><span class="pun">,</span><span class="pln">
+r</span><span class="pun">.</span><span class="pln">load_date
+FROM
+staging</span><span class="pun">.</span><span class="pln">customer_meter_load r
+WHERE raw</span><span class="pun">.</span><span class="typ">ConvertHash</span><span class="pun">(</span><span class="pln">CONCAT</span><span class="pun">(</span><span class="pln">meter_id</span><span class="pun">,</span><span class="pln"> </span><span class="str">'|'</span><span class="pun">,</span><span class="pln"> c_customer_id</span><span class="pun">))</span><span class="pln"> NOT IN </span><span class="pun">(</span><span class="pln">SELECT link_hash_id FROM raw</span><span class="pun">.</span><span class="pln">link_meter_customer</span><span class="pun">);</span></code></pre>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Information mart" duration="15" step="14"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">14. Information mart</h2>
+        <h2 is-upgraded=""><strong>Business problem</strong></h2>
+<p>As a billing analyst I would like to know end of the month readings for all meters and be able to split/filter/aggregate it by:</p>
+<ul>
+<li>Operational aspects (meter dimensions)</li>
+<li>Customer aspects (customer dimensions)</li>
+</ul>
+<p>Sample reports:</p>
+<ul>
+<li>Top district by usage this month</li>
+<li>Top N customers by Usage this year</li>
+<li>Top N Customers with Usage change last month</li>
+<li>Monthly Total Usage</li>
+</ul>
+<h2 is-upgraded="">Star Schema design</h2>
+<p>Fact table should consist of:</p>
+<ul>
+<li>dt (it could be foreign key to Date table)</li>
+<li>meter_fk</li>
+<li>customer_fk</li>
+<li>reading</li>
+</ul>
+<p>Customer dimension consist of:</p>
+<ul>
+<li>Customer_pk</li>
+<li>Customer_name</li>
+<li>Customer_location</li>
+<li>Others ...</li>
+</ul>
+<p>Meter dimension consist of:</p>
+<ul>
+<li>Meter_pk</li>
+<li>Service_name</li>
+<li>Manufacturer</li>
+</ul>
+<h2 is-upgraded=""><strong>Infomart</strong></h2>
+<p>Create a dataset for storing information mart. </p>
+<h2 is-upgraded=""><strong>Meter Dimension - Type 1</strong></h2>
+<p>The simplest dimension is just joining the Hub and the Satellite but first we need to decide if we need Type 1 or Type 2 dimension. Type 1 is the dimension that shows most current values for all the attributes. </p>
+<p>For Type 1 we can use the Hub key as the primary key for the dimension. Keeping hash is suggested as it's already unique. </p>
+<p>meter_dim</p>
+<pre><code><span class="pln">create </span><span class="kwd">or</span><span class="pln"> replace view
+infomart</span><span class="pun">.</span><span class="pln">meter_dim_v </span><span class="kwd">as</span><span class="pln">
+</span><span class="kwd">select</span><span class="pln">
+sat</span><span class="pun">.</span><span class="pln">meter_hash_id</span><span class="pun">,</span><span class="pln">
+sat</span><span class="pun">.</span><span class="pln">service_name</span><span class="pun">,</span><span class="pln">
+sat</span><span class="pun">.</span><span class="pln">manufacturer</span><span class="pun">,</span><span class="pln">
+</span><span class="typ">From</span><span class="pln"> raw</span><span class="pun">.</span><span class="pln">hub_meter hub</span><span class="pun">,</span><span class="pln"> raw</span><span class="pun">.</span><span class="pln">sat_meter sat
+</span><span class="kwd">where</span><span class="pln"> hub</span><span class="pun">.</span><span class="pln">meter_hash_id</span><span class="pun">=</span><span class="pln">sat</span><span class="pun">.</span><span class="pln">meter_hash_id </span><span class="kwd">and</span><span class="pln">
+sat</span><span class="pun">.</span><span class="pln">load_date </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">select</span><span class="pln"> max</span><span class="pun">(</span><span class="pln">s2</span><span class="pun">.</span><span class="pln">load_date</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">from</span><span class="pln"> raw</span><span class="pun">.</span><span class="pln">sat_meter s2 </span><span class="kwd">where</span><span class="pln"> hub</span><span class="pun">.</span><span class="pln">meter_hash_id </span><span class="pun">=</span><span class="pln"> s2</span><span class="pun">.</span><span class="pln">meter_hash_id</span><span class="pun">);</span></code></pre>
+<h2 is-upgraded=""><strong>(Optional) Customer Dimension - Type 2</strong></h2>
+<p>Type 2 is a bit more difficult - there will be more than one row for each business key, for example one customer has updated their name or email - a unique key has to be created (business key, load_date).</p>
+<p>Select raw.ConvertHash(concat(hub.customer_id,'|',sat.load_date)),</p>
+<p>Sat.name,</p>
+<p>Sat.email,</p>
+<p>sat.load_date as effective_from,</p>
+<p>lead(sat.load_date) over(partition by sat.customer_hash_id order by sat.load_date) as effective_to</p>
+<p>From raw.hub_customer hub, raw.sat_customer sat</p>
+<p>where hub.customer_hash_id=sat.customer_hash_id</p>
+<pre></pre>
+<p>With this approach, the latest data can be found with the "effective_to is NULL" filter. Give it a try!</p>
+<p>For the sake of simplicity, let's stick to type 1 dimension for this table. </p>
+<p>create or replace view infomart.customer_dim_v as</p>
+<p>Select</p>
+<p>hub.customer_hash_id,</p>
+<p>Sat.name,</p>
+<p>Sat.email</p>
+<p>From raw.hub_customer hub, raw.sat_customer sat</p>
+<p>where hub.customer_hash_id=sat.customer_hash_id and sat.load_date = (select max(s2.load_date)</p>
+<p>from raw.sat_customer s2 where hub.customer_hash_id = s2.customer_hash_id);</p>
+<h2 is-upgraded=""><strong>Fact - Type 1</strong></h2>
+<p>Facts are based on Link tables as they contain information about reading events. </p>
+<p>If you haven't created customer entity then use this DDL:</p>
+<pre><code><span class="pln">create </span><span class="kwd">or</span><span class="pln"> replace view infomart</span><span class="pun">.</span><span class="pln">readings_fact_v </span><span class="kwd">as</span><span class="pln">
+</span><span class="typ">Select</span><span class="pln">
+m_r_lnk</span><span class="pun">.</span><span class="pln">meter_hash_id </span><span class="kwd">as</span><span class="pln"> meter_hash_id</span><span class="pun">,</span><span class="pln">
+m_r_lnk</span><span class="pun">.</span><span class="pln">load_date </span><span class="kwd">as</span><span class="pln"> fact_load_date</span><span class="pun">,</span><span class="pln">
+sat</span><span class="pun">.</span><span class="typ">Readings</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> reading
+</span><span class="kwd">from</span><span class="pln">
+raw</span><span class="pun">.</span><span class="pln">link_meter_readings m_r_lnk</span><span class="pun">,</span><span class="pln">
+raw</span><span class="pun">.</span><span class="pln">sat_readings sat </span><span class="kwd">where</span><span class="pln">
+m_r_lnk</span><span class="pun">.</span><span class="pln">readings_hash_id</span><span class="pun">=</span><span class="pln">sat</span><span class="pun">.</span><span class="pln">readings_hash_id</span></code></pre>
+<p>(Optional) If you have created customer entities then use this:</p>
+<pre><code><span class="pln">create </span><span class="kwd">or</span><span class="pln"> replace view infomart</span><span class="pun">.</span><span class="pln">readings_fact_v </span><span class="kwd">as</span><span class="pln">
+</span><span class="typ">Select</span><span class="pln">
+m_r_lnk</span><span class="pun">.</span><span class="pln">meter_hash_id </span><span class="kwd">as</span><span class="pln"> meter_hash_id</span><span class="pun">,</span><span class="pln">
+m_c_lnk</span><span class="pun">.</span><span class="pln">customer_hash_id </span><span class="kwd">as</span><span class="pln"> customer_hash_id</span><span class="pun">,</span><span class="pln">
+m_r_lnk</span><span class="pun">.</span><span class="pln">load_date </span><span class="kwd">as</span><span class="pln"> fact_load_date</span><span class="pun">,</span><span class="pln">
+sat</span><span class="pun">.</span><span class="typ">Readings</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> reading
+</span><span class="kwd">from</span><span class="pln">
+raw</span><span class="pun">.</span><span class="pln">link_meter_readings m_r_lnk</span><span class="pun">,</span><span class="pln">
+raw</span><span class="pun">.</span><span class="pln">link_meter_customer m_c_lnk</span><span class="pun">,</span><span class="pln">
+raw</span><span class="pun">.</span><span class="pln">sat_readings sat </span><span class="kwd">where</span><span class="pln">
+m_r_lnk</span><span class="pun">.</span><span class="pln">readings_hash_id</span><span class="pun">=</span><span class="pln">sat</span><span class="pun">.</span><span class="pln">readings_hash_id
+</span><span class="kwd">and</span><span class="pln">
+m_c_lnk</span><span class="pun">.</span><span class="pln">meter_hash_id</span><span class="pun">=</span><span class="pln">m_r_lnk</span><span class="pun">.</span><span class="pln">meter_hash_id</span></code></pre>
+<h2 is-upgraded=""><strong>Test it</strong></h2>
+<p>Lets give it a try and check one of the dates.  </p>
+<pre><code><span class="kwd">select</span><span class="pln"> r</span><span class="pun">.</span><span class="pln">fact_load_date</span><span class="pun">,</span><span class="pln"> r</span><span class="pun">.</span><span class="pln">reading</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">.</span><span class="pln">service_name </span><span class="kwd">from</span><span class="pln"> infomart</span><span class="pun">.</span><span class="pln">readings_fact_v r</span><span class="pun">,</span><span class="pln"> infomart</span><span class="pun">.</span><span class="pln">meter_dim_v m
+</span><span class="kwd">where</span><span class="pln">
+m</span><span class="pun">.</span><span class="pln">meter_hash_id </span><span class="pun">=</span><span class="pln"> r</span><span class="pun">.</span><span class="pln">meter_hash_id
+</span><span class="kwd">and</span><span class="pln"> fact_load_date </span><span class="pun">=</span><span class="pln"> </span><span class="str">'2021-08-01'</span></code></pre>
+<h2 is-upgraded=""><strong>Top districts by usage</strong></h2>
+<p>Start with following query that helps you aggregate usage by month</p>
+<pre><code><span class="kwd">with</span><span class="pln"> end_of_month </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">(</span><span class="pln">
+   </span><span class="kwd">select</span><span class="pln">
+       meter_hash_id</span><span class="pun">,</span><span class="pln">
+       reading </span><span class="kwd">as</span><span class="pln"> eom_reading</span><span class="pun">,</span><span class="pln">
+       fact_load_date
+       </span><span class="kwd">from</span><span class="pln"> infomart</span><span class="pun">.</span><span class="pln">readings_fact_v r
+       </span><span class="kwd">where</span><span class="pln"> extract</span><span class="pun">(</span><span class="pln">day </span><span class="kwd">from</span><span class="pln"> fact_load_date</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pln">
+</span><span class="pun">),</span><span class="pln">
+usage_by_district </span><span class="kwd">as</span><span class="pln"> </span><span class="pun">(</span><span class="pln">
+</span><span class="kwd">select</span><span class="pln">
+m</span><span class="pun">.</span><span class="pln">service_name</span><span class="pun">,</span><span class="pln">
+eom_reading </span><span class="pun">-</span><span class="pln"> ifnull</span><span class="pun">(</span><span class="pln">lead</span><span class="pun">(</span><span class="pln">eom_reading</span><span class="pun">)</span><span class="pln"> over </span><span class="pun">(</span><span class="pln">partition </span><span class="kwd">by</span><span class="pln"> eom</span><span class="pun">.</span><span class="pln">meter_hash_id order </span><span class="kwd">by</span><span class="pln"> fact_load_date desc</span><span class="pun">),</span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> usage</span><span class="pun">,</span><span class="pln">
+date_sub</span><span class="pun">(</span><span class="pln">fact_load_date</span><span class="pun">,</span><span class="pln"> interval </span><span class="lit">1</span><span class="pln"> day</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> last_day_of_month
+</span><span class="kwd">from</span><span class="pln"> end_of_month eom </span><span class="kwd">join</span><span class="pln"> infomart</span><span class="pun">.</span><span class="pln">meter_dim_v m on eom</span><span class="pun">.</span><span class="pln">meter_hash_id </span><span class="pun">=</span><span class="pln"> m</span><span class="pun">.</span><span class="pln">meter_hash_id
+</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">select</span><span class="pln"> service_name</span><span class="pun">,</span><span class="pln"> last_day_of_month</span><span class="pun">,</span><span class="pln"> sum</span><span class="pun">(</span><span class="pln">usage</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> total_usage </span><span class="kwd">from</span><span class="pln"> usage_by_district
+</span><span class="kwd">group</span><span class="pln"> </span><span class="kwd">by</span><span class="pln"> service_name</span><span class="pun">,</span><span class="pln">last_day_of_month order </span><span class="kwd">by</span><span class="pln"> last_day_of_month desc</span><span class="pun">,</span><span class="pln"> total_usage desc </span></code></pre>
+<p>Quiz: What's the top district with the biggest monthly usage and what was the usage for the month 2021-07?</p>
+<h2 is-upgraded=""><strong>(Optional) Top N customers by Usage last month</strong></h2>
+<p>Those are the customers with the highest reading delta. </p>
+<p>with end_of_month as (</p>
+<p>  select</p>
+<p>      customer_hash_id,</p>
+<p>      meter_hash_id,</p>
+<p>      reading as eom_reading,</p>
+<p>      fact_load_date</p>
+<p>      from infomart.readings_fact_v r</p>
+<p>      where extract(day from fact_load_date) = 1</p>
+<p>),</p>
+<p>usage_with_customer as (</p>
+<p>select</p>
+<p>m.name,</p>
+<p>meter_hash_id,</p>
+<p>eom_reading - ifnull(lead(eom_reading) over (partition by eom.meter_hash_id order by fact_load_date desc),0) as usage,</p>
+<p>date_sub(fact_load_date, interval 1 day) as last_day_of_month</p>
+<p>from end_of_month eom join infomart.customer_dim_v m on eom.customer_hash_id = m.customer_hash_id</p>
+<p>)</p>
+<p>select name, last_day_of_month, sum(usage) as total_usage from usage_with_customer u</p>
+<p>group by name,last_day_of_month order by last_day_of_month desc, total_usage desc</p>
+<p>Quiz: What's the top 1 customer for the month 2021-07?</p>
+<h2 is-upgraded=""><strong>Other question:</strong></h2>
+<ul>
+<li>Top N Customers with Usage change last month - those are the customers with the highest change to the previous month. </li>
+<li>Monthly total usage for every month. </li>
+</ul>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Congratulations" duration="5" step="15"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">15. Congratulations</h2>
+        <p>Congratulations, you've successfully built your first Data Vault model. Now you should read a book! There is still plenty to learn. </p>
+<p>First thing you can try is to optimize your information mart. </p>
+<h2 is-upgraded=""><strong>Materializations</strong></h2>
+<p>You may notice that some queries run by information marts are expensive due to underlying views to the Raw layer. It looks like a star but underneath there are many expensive joins.</p>
+<p>Info mart can be materialized or materialized views could be leveraged (if possible). Go give it a try and compare the cost of the query - first run create table as select instead of creating a view for each fact and dim.  </p>
+<p>Once data is materialized, any star-join optimizations will kick in and the solution will be much more performant.</p>
+<p>How would you fill this table for every day?</p>
+
+
+      </div></div></google-codelab-step></div><div id="controls"><div id="fabs"><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#" id="previous-step" title="Previous step" disappear="">Back</a><div class="spacer"></div><a href="https://codelabs-preview.appspot.com/?file_id=1fx0qOGJPAjPI2rMXoAhk_GGGcVwUP6445mCd-yOQtzU#" id="next-step" title="Next step">Next</a><a href="https://codelabs-preview.appspot.com/" id="done" hidden="" title="Codelab complete">Done</a></div></div></div></google-codelab>
+
+  <script async="">
+    document.addEventListener("DOMContentLoaded", function() {
+      var pubBtn = document.getElementById('publishButton');
+      var pubForm = document.getElementById('publishForm');
+      var pubStatus = document.getElementById('publishButtonStatus');
+
+      pubForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        pubBtn.disabled = true;
+        pubStatus.textContent = '';
+        pubStatus.classList.remove('success');
+        pubStatus.classList.remove('error');
+
+        var req = new XMLHttpRequest();
+
+        var onError = function() {
+          var msg = 'Request failed';
+          if (req.statusText) {
+            msg += ' with status "' + req.statusText + '"';
+          }
+          if (req.responseText) {
+            msg += ': ' + req.responseText;
+          }
+          pubStatus.classList.add('error');
+          pubStatus.textContent = msg;
+          pubBtn.disabled = false;
+        };
+
+        req.addEventListener('load', function() {
+          if (req.status != 200) {
+            onError();
+            return;
+          }
+          pubStatus.textContent = ('Publication request submitted' +
+            ' (reload preview to re-publish)');
+          pubStatus.classList.add('success');
+        });
+        req.addEventListener('error', onError);
+        req.addEventListener('abort', onError);
+        req.open("post", pubForm.action);
+        req.send(new FormData(pubForm));
+      });
+    });
+  </script>
+
+  <script src="./qwiklab_files/native-shim.js"></script>
+  <script src="./qwiklab_files/custom-elements.min.js"></script>
+  <script src="./qwiklab_files/prettify.js"></script>
+  <script src="./qwiklab_files/codelab-elements.js"></script>
+  <script src="./qwiklab_files/api.js"></script>
+
+
+</body></html>
