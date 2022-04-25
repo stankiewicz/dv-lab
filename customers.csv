@@ -1,0 +1,6 @@
+c_customer_id,type,source,c_customer_name,load_date
+A1,IND,Web,ram,2021-06-12
+A2,CORP,Web,shyam inc,2021-06-12
+A3,IND,Web,dhyam,2021-06-12
+A1,IND,Web,a ram sam sam,2021-06-16
+A3,IND,Web,dhyam,2021-06-16
