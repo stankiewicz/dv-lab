@@ -5,10 +5,10 @@
   <meta name="theme-color" content="#4F7DC9">
   
   <title>Your First Data Vault model</title>
-  <link rel="stylesheet" href="./Your First Data Vault model_files/css">
-  <link rel="stylesheet" href="./Your First Data Vault model_files/icon">
-  <link rel="stylesheet" href="./Your First Data Vault model_files/codelab-elements.css">
-  <link rel="stylesheet" href="./Your First Data Vault model_files/prettify.css">
+  <link rel="stylesheet" href="./qwiklab_files/css">
+  <link rel="stylesheet" href="./qwiklab_files/icon">
+  <link rel="stylesheet" href="./qwiklab_files/codelab-elements.css">
+  <link rel="stylesheet" href="./qwiklab_files/prettify.css">
   <style>
     .success {
       color: #1e8e3e;
@@ -67,13 +67,13 @@
 <p>In the first task you will use pen and paper.</p>
 <p>Here are raw exports:</p>
 <p>meter_readings_export:</p>
-<p class="image-container"><img style="width: 624.00px" src="./Your First Data Vault model_files/pasted image 0.png"></p>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/pasted image 0.png"></p>
 <p>Meter_load:</p>
-<p class="image-container"><img style="width: 624.00px" src="./Your First Data Vault model_files/pasted image 0(1).png"></p>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/pasted image 0(1).png"></p>
 <p>Customer_export:</p>
-<p class="image-container"><img style="width: 624.00px" src="./Your First Data Vault model_files/pasted image 0(2).png"></p>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/pasted image 0(2).png"></p>
 <p>Customer_meter_export:</p>
-<p class="image-container"><img style="width: 406.00px" src="./Your First Data Vault model_files/pasted image 0(3).png"></p>
+<p class="image-container"><img style="width: 406.00px" src="./qwiklab_files/pasted image 0(3).png"></p>
 <p>Some things to investigate</p>
 <ol type="1" start="1">
 <li>What are the business keys for meter and reading and customer?</li>
@@ -88,13 +88,13 @@
 </aside>
 <h2 is-upgraded=""><strong>Relationships</strong></h2>
 <p>You should come up with something like this:</p>
-<p class="image-container"><img style="width: 332.50px" src="./Your First Data Vault model_files/Untitled.png"></p>
+<p class="image-container"><img style="width: 332.50px" src="./qwiklab_files/Untitled.png"></p>
 <h2 is-upgraded="">Example HUBs</h2>
-<p class="image-container"><img style="width: 624.00px" src="./Your First Data Vault model_files/pasted image 0(4).png"></p>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/pasted image 0(4).png"></p>
 <h2 is-upgraded="">Example SATs:</h2>
-<p class="image-container"><img style="width: 259.96px" src="./Your First Data Vault model_files/pasted image 0(5).png"></p>
+<p class="image-container"><img style="width: 259.96px" src="./qwiklab_files/pasted image 0(5).png"></p>
 <h2 is-upgraded=""><strong>Example LINKs:</strong></h2>
-<p class="image-container"><img style="width: 246.50px" src="./Your First Data Vault model_files/pasted image 0(6).png"></p>
+<p class="image-container"><img style="width: 246.50px" src="./qwiklab_files/pasted image 0(6).png"></p>
 
 
       </div></div></google-codelab-step><google-codelab-step label="Architecture" duration="3" step="5"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">5. Architecture</h2>
@@ -116,7 +116,7 @@
 </aside>
 <h2 is-upgraded=""><strong>Outcome</strong></h2>
 <p>For the sake of completeness, we are also adding source systems and other useful components. </p>
-<p class="image-container"><img style="width: 624.00px" src="./Your First Data Vault model_files/pasted image 0(7).png"></p>
+<p class="image-container"><img style="width: 624.00px" src="./qwiklab_files/pasted image 0(7).png"></p>
 
 
       </div></div></google-codelab-step><google-codelab-step label="Setting up staging datasets" duration="5" step="7"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">7. Setting up staging datasets</h2>
@@ -126,11 +126,11 @@
 <ol type="1" start="1">
 <li>Press 3 dots next to project:</li>
 </ol>
-<p class="image-container"><img style="width: 330.00px" src="./Your First Data Vault model_files/pasted image 0(8).png"></p>
+<p class="image-container"><img style="width: 330.00px" src="./qwiklab_files/pasted image 0(8).png"></p>
 <ol type="1" start="2">
 <li>Type name and set location</li>
 </ol>
-<p class="image-container"><img style="width: 516.00px" src="./Your First Data Vault model_files/pasted image 0(9).png"></p>
+<p class="image-container"><img style="width: 516.00px" src="./qwiklab_files/pasted image 0(9).png"></p>
 <p>Within BigQuery UI, compose a new query. </p>
 <h3 is-upgraded="">Meter Staging table</h3>
 <pre><code><span class="pln">CREATE OR REPLACE TABLE staging</span><span class="pun">.</span><span class="pln">meter_load
@@ -682,11 +682,11 @@ date_sub</span><span class="pun">(</span><span class="pln">fact_load_date</span>
     });
   </script>
 
-  <script src="./Your First Data Vault model_files/native-shim.js"></script>
-  <script src="./Your First Data Vault model_files/custom-elements.min.js"></script>
-  <script src="./Your First Data Vault model_files/prettify.js"></script>
-  <script src="./Your First Data Vault model_files/codelab-elements.js"></script>
-  <script src="./Your First Data Vault model_files/api.js"></script>
+  <script src="./qwiklab_files/native-shim.js"></script>
+  <script src="./qwiklab_files/custom-elements.min.js"></script>
+  <script src="./qwiklab_files/prettify.js"></script>
+  <script src="./qwiklab_files/codelab-elements.js"></script>
+  <script src="./qwiklab_files/api.js"></script>
 
 
 </body></html>
